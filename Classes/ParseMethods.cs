@@ -12,28 +12,54 @@ namespace Agamotto.Classes
     static class ParseMethods
     {
 
-        public static void DownloadRemoteImageFile(string uri, string fileName)//метод для скачивания фотографии по url адресу
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        
 
-            if ((response.StatusCode == HttpStatusCode.OK ||
-                response.StatusCode == HttpStatusCode.Moved ||
-                response.StatusCode == HttpStatusCode.Redirect) &&
-                response.ContentType.StartsWith("image", StringComparison.OrdinalIgnoreCase))
+        /*public static async Task GetPicture2(string link)
+        {
+            string FileName = "pictures\\photo.jpg";
+            File.Delete(FileName);
+            AngleSharp.Dom.IDocument document = await ParseMethods.ParseDumb(link);
+            var all = document.All;
+            var s = all.Where(c => c.TagName == "SPAN" && c.Attributes.Length > 0 && c.Attributes[0].Value == "slider-content").ToArray();
+            string str = "http:";
+            if (s.Length > 1) str += s[1].Children[0].Attributes[0].Value;
+            else str += s[0].Children[0].Attributes[0].Value;
+            Console.WriteLine(str);
+            DownloadRemoteImageFile(str, FileName);
+            Console.WriteLine("Файл скачен");
+        }
+
+        public static async Task<string> GetPicture(string link)
+        {
+            AngleSharp.Dom.IDocument document = await ParseMethods.ParseDumb(link);
+            var all = document.All;
+            var s = all.Where(c => c.TagName == "SPAN" && c.Attributes.Length > 0 && c.Attributes[0].Value == "slider-content").ToArray();
+            string str = "http:";
+            if (s.Length > 0) str += s[0].Children[0].Attributes[0].Value;
+            return str;
+        }*/
+
+        public static string GetUrl(string key)
+        {
+
+            string[] links = new string[]
             {
-                using (Stream inputStream = response.GetResponseStream())
-                using (Stream outputStream = File.OpenWrite(fileName))
-                {
-                    byte[] buffer = new byte[4096];
-                    int bytesRead;
-                    do
-                    {
-                        bytesRead = inputStream.Read(buffer, 0, buffer.Length);
-                        outputStream.Write(buffer, 0, bytesRead);
-                    } while (bytesRead != 0);
-                }
-            }
+                "https://www.wildberries.ru/catalog/elektronika/smartfony-i-telefony?page=1",
+                "https://www.wildberries.ru/catalog/elektronika/noutbuki-periferiya?page=1",
+                "https://www.wildberries.ru/catalog/elektronika/tv-audio-foto-video-tehnika?page=1",
+                "https://www.wildberries.ru/catalog/elektronika/tehnika-dlya-doma?page=1",
+                "https://www.wildberries.ru/catalog/elektronika/tehnika-dlya-kuhni?page=1"
+            };
+
+
+            if (key.Contains("smartphones")) return links[0];
+            else if (key.Contains("notebooks")) return links[1];
+            else if (key.Contains("television")) return links[2];
+            else if (key.Contains("forhome")) return links[3];
+            else if (key.Contains("forkitchen")) return links[4];
+            else return "";
+
+
         }
 
         public static async Task<List<AngleSharp.Dom.IDocument>> ParsePages(int pages, string link) //метод который парсит несколько страниц
@@ -110,7 +136,7 @@ namespace Agamotto.Classes
         public static async Task<AngleSharp.Dom.IDocument> ParseDumb(string link) //парсинг всей html старницы
         {
             var config = Configuration.Default.WithDefaultLoader();
-            var document = await BrowsingContext.New(config).OpenAsync(link);
+            var document = await BrowsingContext.New(config).OpenAsync(link).ConfigureAwait(false);
             return document;
         }
 
@@ -145,6 +171,21 @@ namespace Agamotto.Classes
                     }
                     g.nameBrend = e2.Children[1].Children[2].Children[0].TextContent.Replace("/", "").Trim();
                     g.href = "https://www.wildberries.ru" + href[0].Value;
+                    //var h=f.Where(p=>p.Attributes.Length>0 && p.Attributes[0].Value== "thumbnail").ToArray();
+                    if (e2.Children[0].Children[1].TagName == "IMG")
+                    {
+                        string str = e2.Children[0].Children[1].Attributes[1].Value;
+                        if (str.Contains("jpg")) g.image = "http:" + str;
+                        else g.image = "http://russianchicagomag.com/wp-content/uploads/2014/06/mlm_prodaschi.jpg";
+                    }
+                    else
+                    {
+                        string str = e2.Children[0].Children[1].Children[0].Attributes[1].Value;
+                        if (str.Contains("jpg")) g.image = "http:" + str;
+                        else g.image = "http://russianchicagomag.com/wp-content/uploads/2014/06/mlm_prodaschi.jpg";
+                    }
+
+                    //g.image = "http:" + h[0].Attributes[1].Value;
                     result.Add(g);
                 }
                 catch (Exception ex)
@@ -177,6 +218,34 @@ namespace Agamotto.Classes
             Console.WriteLine($"Спарсено {count} страниц");
             return result;
         }
+
+
+
+        public static void DownloadRemoteImageFile(string uri, string fileName)//метод для скачивания фотографии по url адресу
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            if ((response.StatusCode == HttpStatusCode.OK ||
+                response.StatusCode == HttpStatusCode.Moved ||
+                response.StatusCode == HttpStatusCode.Redirect) &&
+                response.ContentType.StartsWith("image", StringComparison.OrdinalIgnoreCase))
+            {
+                using (Stream inputStream = response.GetResponseStream())
+                using (Stream outputStream = File.OpenWrite(fileName))
+                {
+                    byte[] buffer = new byte[4096];
+                    int bytesRead;
+                    do
+                    {
+                        bytesRead = inputStream.Read(buffer, 0, buffer.Length);
+                        outputStream.Write(buffer, 0, bytesRead);
+                    } while (bytesRead != 0);
+                }
+            }
+        }
+
+        
 
     }
 }

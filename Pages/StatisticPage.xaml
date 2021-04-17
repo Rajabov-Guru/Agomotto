@@ -1,0 +1,41 @@
+﻿<Page x:Class="Agamotto.Pages.StatisticPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Agamotto.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="StatisticPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="93*"/>
+            <RowDefinition Height="86*"/>
+            <RowDefinition Height="86*"/>
+            <RowDefinition Height="88*"/>
+            <RowDefinition Height="97*"/>
+        </Grid.RowDefinitions>
+        <Menu VerticalAlignment="Top" Height="23" FontWeight="Bold" Margin="0,5,-207,0" HorizontalAlignment="Left" Width="1007">
+            <Menu.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="#FFDEDE00" Offset="0.412"/>
+                </LinearGradientBrush>
+            </Menu.Foreground>
+            <Menu.Background>
+                <ImageBrush/>
+            </Menu.Background>
+            <MenuItem Header="Главная" FontSize="14" Click="MainClick" />
+            <MenuItem Header="Выход" FontSize="14" />
+        </Menu>
+        <Button x:Name="cg" BorderBrush="White" Foreground="#FFDEDE00" FontWeight="Bold" FontSize="22" Background="{x:Null}" Margin="222,10,209,10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Общая статистика" Grid.Row="1" Click="SmartClick"/>
+        <Button Content="Назад" HorizontalAlignment="Left" Margin="41,51,0,0" VerticalAlignment="Top" Width="80" Foreground="#FFDEDE00" Height="32" FontSize="16" FontWeight="Bold" Click="BackClick">
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="cg_Copy" BorderBrush="White" Foreground="#FFDEDE00" FontWeight="Bold" FontSize="22" Background="{x:Null}" Margin="222,10,209,10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Статистика по категориям" Grid.Row="2" Click="SmartClick"/>
+        <Button x:Name="cg_Copy1" BorderBrush="White" Foreground="#FFDEDE00" FontWeight="Bold" FontSize="22" Background="{x:Null}" Margin="222,10,209,10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Статистика по производителю" Grid.Row="3" Click="SmartClick"/>
+    </Grid>
+</Page>

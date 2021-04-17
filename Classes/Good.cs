@@ -15,7 +15,7 @@ namespace Agamotto.Classes
         public string name = "Неизвестный товар";
         public string href = "Нет";
         public string properties = "Нет";
-
+        public string image;
         public string ToFormat()
         {
             return $"{type}][{name}][{price}][{nameBrend}][{href}][{properties}";

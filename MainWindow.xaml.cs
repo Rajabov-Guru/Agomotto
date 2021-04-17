@@ -1,4 +1,7 @@
-﻿using Agamotto.Controls;
+﻿
+using Agamotto.Classes;
+using Agamotto.Model;
+using Agamotto.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,48 +22,31 @@ namespace Agamotto
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
+    /// 
+
+
+            /*List<Prod> products;
+            using (ProductContext db = new ProductContext())
+            {
+                products = db.Products.ToList();
+            }
+            for (int i = 0; i < products.Count; i++)
+            {
+                Methods.AddChanges(products[i]);
+            }*/
+
+
+
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Content = new MainPage();
+            //MainFrame.Content = new StatisticPage();
         }
+
         
-            //<Grid x:Name="MainGrid" Margin="37,12,21,-108" Grid.Row="1" Grid.ColumnSpan="3" Height="435" VerticalAlignment="Top"/>
-        
-        private void ProductClick(object sender, RoutedEventArgs e)
-        {
-            if (MainGrid.Children.Count > 0) MainGrid.Children.RemoveAt(0);
-            ProductControl emp = new ProductControl();
-            MainGrid.Children.Add(emp);
-            Grid.SetRow(emp, 1);
-            MainGrid.Height = emp.prodGrid.Height;
-            emp.Width = MainGrid.Width;
-            SetTitle("Товары");
-        }
-
-        public void SetTitle(string s) 
-        {
-            pr.Visibility = Visibility.Hidden;
-            cg.Visibility = Visibility.Hidden;
-            gr.Visibility = Visibility.Hidden;
-            title.Content = s;
-            title.Visibility = Visibility.Visible;
-        }
-
-        public void DesetTitle(string s="No") 
-        {
-            title.Visibility = Visibility.Hidden;
-            pr.Visibility = Visibility.Visible;
-            cg.Visibility = Visibility.Visible;
-            gr.Visibility = Visibility.Visible;
-            
-        }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            DesetTitle();
-            if (MainGrid.Children.Count > 0) MainGrid.Children.RemoveAt(0);
-        }
+          
     }
 }

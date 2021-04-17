@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\79019\Desktop\Agamotto\App.xaml
-31568104185
+10578435153
 
-112095526588
-120-1076262363
-Controls\ProductControl.xaml;MainWindow.xaml;Windows\ProductForm.xaml;
+26-1997500777
+1292083205652
+MainWindow.xaml;Pages\AllPage.xaml;Pages\CategoryPage.xaml;Pages\ChangePage.xaml;Pages\MainPage.xaml;Pages\ProdStatPage.xaml;Pages\ProductPage.xaml;Pages\StatCategory.xaml;Pages\StatisticPage.xaml;Windows\MessageChanges.xaml;
 
-False
+True
 
