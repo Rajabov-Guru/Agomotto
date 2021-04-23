@@ -16,7 +16,7 @@ namespace Agamotto.Model
         [Required]
         public string Name { get; set; }
 
-        public virtual ICollection<Prod> Prods { get; set; }
+        public virtual ICollection<Product> Prods { get; set; }
 
     }
 }

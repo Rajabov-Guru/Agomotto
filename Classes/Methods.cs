@@ -13,7 +13,7 @@ namespace Agamotto.Classes
 {
     static class Methods
     {
-        public static async Task<bool> Refresh(Prod p)
+        public static async Task<bool> Refresh(Product p)
         {
             double d = p.Price;
             try
@@ -27,14 +27,14 @@ namespace Agamotto.Classes
             if (d != p.Price)
             {
                 Change ch = new Change();
-                ch.Prod_Id = p.Id;
-                ch.PricBefore = p.Price;
+                ch.Product_Id = p.Id;
+                ch.PriceBefore = p.Price;
                 ch.Sum = d - p.Price;
                 p.Price += ch.Sum;
                 ch.Increase = ch.Sum > 0;
                 ch.Date = DateTime.Now;
                 p.LastChangeDate = ch.Date;
-                using (ProductContext db = new ProductContext())
+                using (ParserContext db = new ParserContext())
                 {
                     var k = db.Products.First(c => c.Id == p.Id);
                     k.Price = p.Price;
@@ -60,12 +60,13 @@ namespace Agamotto.Classes
             var list3 = ParseMethods2.ParseGoods(TVs, "Телевизоры и другая аудио-видео электроника");
             var list4 = ParseMethods2.ParseGoods(Forhome, "Техника для дома");
             var list5 = ParseMethods2.ParseGoods(Forkitchen, "Техника для кухни");
-
+            Console.WriteLine("\n\nВсе данные спарсены. Подождите пока они добавятся в БАЗУ ДАННЫХ........\n\n");
             AddAllData(list1);
             AddAllData(list2);
             AddAllData(list3);
             AddAllData(list4);
             AddAllData(list5);
+            Console.WriteLine("Операция выполнена: Данные успешно добавлены в базу. ");
         }
         public static void AddAllData(List<Good[]> B)
         {
@@ -75,9 +76,9 @@ namespace Agamotto.Classes
                 for (int i = 0; i < B[j].Length; i++)
                 {
                     var good = B[j][i];
-                    using (ProductContext db = new ProductContext())
+                    using (ParserContext db = new ParserContext())
                     {
-                        Prod p = new Prod();
+                        Product p = new Product();
                         p.Category = good.type;
                         p.Name = good.name;
                         p.Price = good.price;
@@ -98,7 +99,7 @@ namespace Agamotto.Classes
                         p.Brend_Id = db.Brends.First(c => c.Name == b.Name).Id;
                         db.Products.Add(p);
                         db.SaveChanges();
-                        Console.WriteLine("Успешно" + i);
+                        Console.WriteLine($"Товар {p.Name} успешно добавлен {i}  {DateTime.Now.ToString()}");
                     }
                 }
             }
@@ -243,27 +244,27 @@ namespace Agamotto.Classes
         }
 
 
-        public static void AddChanges(Prod product)
+        public static void AddChanges(Product product)
         {
             product.RandCount(10);
             for (int i = 0; i < product.CountOfChanges; i++)
             {
-                RandomDateTime rand = new RandomDateTime(2021, 1, 1);
+                RandomDateTime rand = new RandomDateTime(2021, 4, 1);
                 Change ch = new Change();
-                ch.Prod_Id = product.Id;
-                ch.PricBefore = product.Price;
+                ch.Product_Id = product.Id;
+                ch.PriceBefore = product.Price;
                 ch.Sum = Math.Round(Methods.GetSum(product.Price), 2);
                 product.Price += ch.Sum;
                 ch.Increase = ch.Sum > 0;
                 ch.Date = rand.Next();
                 product.LastChangeDate = ch.Date;
-                using (ProductContext db = new ProductContext())
+                using (ParserContext db = new ParserContext())
                 {
                     db.Changes.Add(ch);
                     db.SaveChanges();
                 }
             }
-            using (ProductContext db = new ProductContext())
+            using (ParserContext db = new ParserContext())
             {
                 var c = db.Products.First(v => v.Id == product.Id);
                 c.Price = Math.Round(product.Price, 2);
@@ -284,7 +285,7 @@ namespace Agamotto.Classes
         }
 
 
-        public static List<Prod> GetList2()
+        /*public static List<Prod> GetList2()
         {
             List<Prod> S = new List<Prod>();
             using (StreamReader sr = new StreamReader("test.txt", Encoding.UTF8))
@@ -329,13 +330,13 @@ namespace Agamotto.Classes
 
             }
             return S;
-        }
+        }*/
 
 
         
 
 
-        public static List<Product> GetList()
+        /*public static List<Product> GetList()
         {
             List<Product> S = new List<Product>();
             using (StreamReader sr = new StreamReader("test.txt", Encoding.UTF8))
@@ -366,6 +367,6 @@ namespace Agamotto.Classes
 
             }
             return S;
-        }
+        }*/
     }
 }

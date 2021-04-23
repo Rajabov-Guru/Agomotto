@@ -25,10 +25,10 @@ namespace Agamotto.Pages
             InitializeComponent();
             string name = "";
             List<string> list1=new List<string>();
-
+            list1.Add("Start");
             List<double> list2 = new List<double>();
-
-            using (ProductContext db=new ProductContext())
+            list2.Add(0);
+            using (ParserContext db =new ParserContext())
             {
                 name=db.Products.First(c => c.Id == id).Name;
                 var l = db.Products.First(c => c.Id == id).Changes.OrderBy(c=>c.Date).ToList();
@@ -43,15 +43,15 @@ namespace Agamotto.Pages
             list11.Add("Start");
             List<double> list22 = new List<double>();
 
-            using (ProductContext db = new ProductContext())
+            using (ParserContext db = new ParserContext())
             {
                 name = db.Products.First(c => c.Id == id).Name;
                 var l = db.Products.First(c => c.Id == id).Changes.OrderBy(c => c.Date).ToList();
-                list22.Add(l.First().PricBefore);
+                list22.Add(l.First().PriceBefore);
                 l.ForEach(delegate (Change r)
                 {
                     list11.Add(r.date);
-                    list22.Add((int)r.Sum+r.PricBefore);
+                    list22.Add((int)r.Sum+r.PriceBefore);
                 });
             }
             list11[list11.Count - 1] = "Finish";

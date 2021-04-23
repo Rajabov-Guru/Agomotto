@@ -11,25 +11,25 @@ namespace Agamotto.Model
     public class Change
     {
         public int Id { get; set; }
-        public int? Prod_Id { get; set; }
+        public int? Product_Id { get; set; } // id продукта
 
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } // Дата фиксирования изменения
 
         [Required]
-        public bool Increase { get; set; }
+        public bool Increase { get; set; } // Повышение ( true = цена повысилась, false = цена снизилась)
 
         [Required]
-        public double Sum { get; set; }
+        public double Sum { get; set; } // Сумма изменения
 
         [Required]
-        public double PricBefore { get; set; }
+        public double PriceBefore { get; set; } // Цена до этого изменения
 
-        [ForeignKey("Prod_Id")]
-        public virtual Prod Prod { get; set; }
+        [ForeignKey("Product_Id")]
+        public virtual Product Product { get; set; }
 
 
         public string date => Date.ToString("dd.MM.yyy");
-        public string prodName => Prod.Name;
+        public string prodName => Product.Name;
     }
 }

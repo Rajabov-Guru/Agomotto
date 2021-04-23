@@ -28,7 +28,7 @@ namespace Agamotto.Pages
             InitializeComponent();
         }
 
-        public ProductPage(Prod p) 
+        public ProductPage(Product p) 
         {
             InitializeComponent();
             id = p.Id;
@@ -68,8 +68,8 @@ namespace Agamotto.Pages
 
         private async void RefreshClick(object sender, RoutedEventArgs e)
         {
-            Prod p = new Prod();
-            using (ProductContext db = new ProductContext()) 
+            Product p = new Product();
+            using (ParserContext db = new ParserContext()) 
             {
                 p = db.Products.First(c => c.Id == id);
             }

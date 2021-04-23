@@ -4,16 +4,16 @@
 exe
 C#
 .cs
-C:\Users\79019\Desktop\Agamotto\obj\Debug\
+C:\Users\79019\Desktop\Проект 2.0\Agamotto\obj\Debug\
 Agamotto
 none
 false
 DEBUG;TRACE
-C:\Users\79019\Desktop\Agamotto\App.xaml
+C:\Users\79019\Desktop\Проект 2.0\Agamotto\App.xaml
 10578435153
 
-25-1155141410
-1292083205652
+241174502892
+129-997836954
 MainWindow.xaml;Pages\AllPage.xaml;Pages\CategoryPage.xaml;Pages\ChangePage.xaml;Pages\MainPage.xaml;Pages\ProdStatPage.xaml;Pages\ProductPage.xaml;Pages\StatCategory.xaml;Pages\StatisticPage.xaml;Windows\MessageChanges.xaml;
 
 False

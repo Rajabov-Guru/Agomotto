@@ -94,7 +94,6 @@ namespace Agamotto.Classes
                 AngleSharp.Dom.IDocument document = await ParseDumb(link).ConfigureAwait(false);
                 if (document != null) Docs.Add(document);
             }
-            Console.WriteLine(Docs.Count);
             return Docs;
         }
 
@@ -134,7 +133,7 @@ namespace Agamotto.Classes
                 result.Add(g);
                 count++;
             }
-            Console.WriteLine($"Parsed: {count}");
+            Console.WriteLine($"Parsed: {count} товаров");
             return result.ToArray();
         }
 

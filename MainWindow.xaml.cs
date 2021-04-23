@@ -42,6 +42,7 @@ namespace Agamotto
         public MainWindow()
         {
             InitializeComponent();
+            Console.ForegroundColor = ConsoleColor.Green;
             MainFrame.Content = new MainPage();
             //MainFrame.Content = new StatisticPage();
         }

@@ -4,18 +4,17 @@ using System.Linq;
 
 namespace Agamotto.Model
 {
-    public class ProductContext : DbContext
+    public class ParserContext : DbContext
     {
         
-        public ProductContext()
-            : base("ProductContext")
+        public ParserContext()
+            : base("ParserContext")
         {
         }
 
-        public virtual DbSet<Prod> Products { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Change> Changes { get; set; }
         public virtual DbSet<Brend> Brends { get; set; }
-
     }
 
     

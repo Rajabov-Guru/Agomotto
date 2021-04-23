@@ -95,8 +95,8 @@
     <Compile Include="Classes\RandomDateTime.cs" />
     <Compile Include="Model\Brend.cs" />
     <Compile Include="Model\Change.cs" />
-    <Compile Include="Model\Prod.cs" />
-    <Compile Include="Model\ProductContext.cs" />
+    <Compile Include="Model\ParserContext.cs" />
+    <Compile Include="Model\Product.cs" />
     <Compile Include="Pages\AllPage.xaml.cs">
       <DependentUpon>AllPage.xaml</DependentUpon>
     </Compile>
@@ -168,7 +168,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Product.cs" />
     <Compile Include="Pages\StatCategory.xaml.cs">
       <DependentUpon>StatCategory.xaml</DependentUpon>
     </Compile>

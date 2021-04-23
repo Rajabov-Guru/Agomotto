@@ -26,9 +26,10 @@
                         <GradientStop Color="#FFDEDE00" Offset="0.296"/>
                     </LinearGradientBrush>
                 </MenuItem.Foreground>
-                <!--<MenuItem Header="Добавить все данные" Click="AddAllClick" ></MenuItem>-->
+                <MenuItem Header="Добавить все данные" Click="AddAllClick" ></MenuItem>
+                <MenuItem Header="Добавить изменения" Click="AddChangeClick" ></MenuItem>
                 <MenuItem Header="Обновить все данные" Click="RefreshClick" ></MenuItem>
-                <MenuItem Header="Очистить базу данных"></MenuItem>
+                <MenuItem Header="Очистить базу данных" Click="ClearClick"></MenuItem>
             </MenuItem>
             <MenuItem Header="Выход" FontSize="14" />
         </Menu>

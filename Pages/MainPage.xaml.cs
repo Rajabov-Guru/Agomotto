@@ -50,18 +50,20 @@ namespace Agamotto.Pages
             UpdateProgressBarDelegate updProgress = new UpdateProgressBarDelegate(bar.SetValue);
             double value = 0;
             int count = 0;
-            using (ProductContext db = new ProductContext())
+            using (ParserContext db = new ParserContext())
             {
                 var g = db.Products.ToList();
-                for (int i = 0; i < g.Count; i++)
+                for (int i = 0; i < 100; i++)
                 {
                     bool r = await Methods.Refresh(g[i]).ConfigureAwait(false);
                     count += r ? 1 : 0;
                     Dispatcher.Invoke(updProgress, new object[] { ProgressBar.ValueProperty, ++value });
-                    Console.WriteLine(r);
+                    Console.WriteLine(r?$"ОБНАРУЖЕНО изменение  у товара с ключом {g[i].Id}":"Изменений НЕ ОБНАРУЖЕНО");
                 }
             }
+            Dispatcher.Invoke(updProgress, new object[] { ProgressBar.ValueProperty, value=0 });
             MessageBox.Show($"Обнаружено {count} изменений", "Результат обновления:", new MessageBoxButton());
+
         }
         private void AllClick(object sender, RoutedEventArgs e)
         {
@@ -80,29 +82,39 @@ namespace Agamotto.Pages
 
         private async void AddAllClick(object sender, RoutedEventArgs e)
         {
-            Methods.DataToDB(2);
+            Methods.DataToDB(1);
         }
 
         private async void RefreshClick(object sender, RoutedEventArgs e)
         {
-            bar.Maximum = 1000;
+            bar.Maximum = 100;//////////////костыль
             bar.Value = 0;
             worker.RunWorkerAsync();
-            //int count = 0;
-            //using (ProductContext db = new ProductContext())
-            //{
-            //    var g = db.Products.ToList();
-            //    for (int i = 0; i < g.Count; i++)
-            //    {
-            //        bool r = await Methods.Refresh(g[i]).ConfigureAwait(false);
-            //        count += r ? 1 : 0;
-            //        Console.WriteLine(r);
-            //    }
-            //}
-            //MessageBox.Show($"Обнаружено {count} изменений", "Результат обновления:", new MessageBoxButton());
         }
 
-        
+        private void AddChangeClick(object sender, RoutedEventArgs e)
+        {
+            using (ParserContext db = new ParserContext()) 
+            {
+                var list = db.Products.ToList();
+                foreach (var item in list) 
+                {
+                    Methods.AddChanges(item);
+                    Console.WriteLine($"Успешно {item.Id}");
+                }
+            }
+        }
+
+        private void ClearClick(object sender, RoutedEventArgs e)
+        {
+            using (ParserContext db = new ParserContext()) 
+            {
+                db.Database.Delete();
+                db.SaveChanges();
+                MessageBox.Show("База данных очищена","Операция выполнена");
+            }
+        }
+
 
     }
 }

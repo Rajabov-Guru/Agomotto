@@ -26,7 +26,7 @@ namespace Agamotto.Pages
         {
             InitializeComponent();
             this.id = id;
-            using (ProductContext db = new ProductContext()) 
+            using (ParserContext db = new ParserContext()) 
             {
                 changeGrid.ItemsSource = db.Products.First(c => c.Id == id).Changes.ToList();
             }

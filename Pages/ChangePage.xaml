@@ -41,7 +41,7 @@
 
                 <DataGridTextColumn Binding="{Binding prodName}" Header="Товар" Width="2*"/>
                 <DataGridTextColumn Binding="{Binding date}" Header="Дата" Width="2*"/>
-                <DataGridTextColumn Binding="{Binding PricBefore}" Header="Цена до" Width="1.3*"/>
+                <DataGridTextColumn Binding="{Binding PriceBefore}" Header="Цена до" Width="1.3*"/>
                 <DataGridTextColumn Binding="{Binding Increase}" Header="Повышение" Width="1.5*"/>
                 <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="1.3*"/>
 

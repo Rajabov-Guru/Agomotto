@@ -34,9 +34,9 @@ namespace Agamotto.Pages
         {
             var t = (Button)sender;
             string s = (string)t.Content;
-            List<Prod> list;
+            List<Product> list;
             
-            using (ProductContext db=new ProductContext()) 
+            using (ParserContext db=new ParserContext()) 
             {
                 list = db.Products.ToList();
             }
@@ -74,7 +74,7 @@ namespace Agamotto.Pages
                     break;
                 case "Статистика по производителю":
                     List<Brend> Brendlist;
-                    using (ProductContext db = new ProductContext()) 
+                    using (ParserContext db = new ParserContext()) 
                     {
                         Brendlist = db.Brends.ToList();
                         for (int i = 0; i < Brendlist.Count; i++)

@@ -8,32 +8,32 @@ using System.Threading.Tasks;
 
 namespace Agamotto.Model
 {
-    public class Prod
+    public class Product
     {
+
         public int Id { get; set; }
         public int? Brend_Id { get; set; }
 
+        [Required]
+        public string Category { get; set; } // Категория товара
 
         [Required]
-        public string Category { get; set; }
+        public string Name { get; set; } // Наименование 
 
         [Required]
-        public string Name { get; set; }
+        public double Price { get; set; } // Цена
 
         [Required]
-        public double Price { get; set; }
+        public string Href { get; set; } // Ссылка на товар
 
         [Required]
-        public int CountOfChanges { get; set; }
+        public string Properties { get; set; } // Характеристики
 
         [Required]
-        public DateTime LastChangeDate { get; set; }
+        public int CountOfChanges { get; set; } // Количество изменений
 
         [Required]
-        public string Href { get; set; }
-
-        public string Properties { get; set; }
-
+        public DateTime LastChangeDate { get; set; } // Дата последнего изменения
         [Required]
         public string image { get; set; }
 
@@ -45,6 +45,5 @@ namespace Agamotto.Model
         public string BrandName => Brend.Name;
         public string Date => LastChangeDate.ToString("dd.MM.yyyy");
         public void RandCount(int n = 15) => CountOfChanges = new Random().Next(0, n + 1);
-
     }
 }

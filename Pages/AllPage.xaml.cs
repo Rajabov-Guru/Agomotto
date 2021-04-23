@@ -24,10 +24,10 @@ namespace Agamotto.Pages
         public AllPage()
         {
             InitializeComponent();
-            using (ProductContext db=new ProductContext()) 
+            using (ParserContext db =new ParserContext()) 
             {
-                List<Prod> source= db.Products.ToList();
-                source.ForEach(delegate (Prod p)
+                List<Product> source= db.Products.ToList();
+                source.ForEach(delegate (Product p)
                 {
                     string h = p.Brend.Name;
                 });
@@ -38,11 +38,11 @@ namespace Agamotto.Pages
         public AllPage(int category) 
         {
             InitializeComponent();
-            List<Prod> source;
-            using (ProductContext db = new ProductContext())
+            List<Product> source;
+            using (ParserContext db = new ParserContext())
             {
                 source = db.Products.ToList();
-                source.ForEach(delegate(Prod p) 
+                source.ForEach(delegate(Product p) 
                 {
                     string h=p.Brend.Name;
                 });
@@ -93,7 +93,7 @@ namespace Agamotto.Pages
         {
             if (prodGrid.SelectedItem != null) 
             {
-                var t = (Prod)prodGrid.SelectedItem;
+                var t = (Product)prodGrid.SelectedItem;
                 //Console.WriteLine(t.GetForm());
                 NavigationService.Navigate(new ProductPage(t));
             }
